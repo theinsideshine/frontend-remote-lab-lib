@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { Route, Switch,BrowserRouter as Router } from 'react-router-dom';
 
-export default App;
+
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+
+import {ExperimentScreen} from './screen/app/ExperimentScreen';
+import {AdvancedScreen} from './screen/app/AdvancedScreen';
+
+
+
+const  theme = createTheme ({
+      palette: {
+            primary: {
+                  main: '#FFFFFF'
+            },
+            text:{
+                  primary: "#000000"
+                } 
+            
+      },
+      typography: {
+            fontFamily: ['"Roboto"', 'sans-serif'].join(',')
+           }
+})
+
+
+export default function App() {
+  return(
+      <ThemeProvider theme={theme}>
+             <Router>     
+            <Switch>
+                        <Route exact path="/" component={ ExperimentScreen }/>
+                        <Route exact path="/avanzado" component={AdvancedScreen}/>
+                       
+            </Switch>
+            </Router>
+      </ThemeProvider> 
+       )
+  }
