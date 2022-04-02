@@ -67,7 +67,8 @@ const Experiment = () => {
   const [modalEdit, setmodalEdit]=useState(false);
   const [memInputs, setMemInputs]= useState([]);   
   const [ ipAddress, setIpAddress] = useState('http://192.168.0.103:4000/'); 
-
+  const [ statusLib, setStatusLib ]= useState(false);
+  const [ versionLib, setVersionLib ]= useState(false);
         
   const [selectConsole, setSelectConsole]=useState({
       uid: 0,
@@ -160,6 +161,53 @@ const Experiment = () => {
     }   
 
 }
+
+
+const startExperiment= async ( ipAddress )=>{   
+  setStatusLib(true); 
+  
+  const response = await fetchWithoutToken(`${ ipAddress }cmd/start`,0,'PUT');             
+  const body = await response.json(); 
+
+  if(response.status === 200) {            
+
+      console.log(body);
+        
+      setStatusLib(false); 
+
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
+
+}
+
+const readVersion= async ( ipAddress )=>{    
+  
+  const response = await fetchWithoutToken(`${ ipAddress }read/version`);             
+  const body = await response.json(); 
+
+  if(response.status === 200) {            
+
+      console.log(body);
+      setVersionLib(body.version);
+   
+
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
+
+}
+
 
 
  
@@ -303,23 +351,32 @@ const Experiment = () => {
                     marginTop: 150,          
                     background:'linear-gradient(180deg,#496cb2,#6390e9)',
                     borderRadius: 15,
-                    height: 90
+                    height: 'auto'
                 
                 }}>
                   <Button
-                  startIcon={<SendIcon />
-                  }
+                  startIcon={<SendIcon />}
+                  onClick={() => startExperiment(ipAddress)}
                   >Empezar experimento </Button>   
-                  <Typography align='center' > <br></br>Estado : En ejecucion</Typography>
+                  <Typography align='center' > <br></br>Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
                   <br></br>
-                  <TextField
+
+                  <Button
+                  startIcon={<SendIcon />}
+                  onClick={() => readVersion(ipAddress)}
+                  >Leer version </Button> 
+                  <Typography align='center' > <br></br>Version : {versionLib} </Typography>
+                  <br></br>
+
+                  
+              </Box>
+              <TextField
                       id="ipAddress"
                       fullWidth
                       label="Ip del servidor"                                            
                       value={ ipAddress }
                       onChange={(e) => setIpAddress(e.target.value)}
                    />
-              </Box>
               </Grid>
               <Grid item  sm={1}>
               </Grid>

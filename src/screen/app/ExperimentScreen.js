@@ -6,7 +6,7 @@ import Header from '../../components/UI/Header';
 
 
 import ImagePattern from '../../images/fondo.jpg';
-import Experiment from '../../components/crud/Experiment';
+import Experiment from '../../components/experiment/Experiment';
 
 export const ExperimentScreen = () => {
   
