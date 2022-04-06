@@ -1,0 +1,13 @@
+
+ const ConverResults = ( data) => {
+ 
+    const DataResult = [ {result: data.result_1},
+                         {result: data.result_2}
+
+    ]
+
+
+};
+
+
+export default ConverResults;
