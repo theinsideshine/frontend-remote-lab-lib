@@ -2,36 +2,36 @@
 
 export const memNameInputs =
        {
-       input0: 'Fuerza',
-       input1: 'Peso',
-       input2: 'Energia',
-       input3: 'Tension',
-       input4: 'Potencia'
+       input0: 'FUERZA',
+       input1: 'PESO',
+       input2: 'ENERGIA',
+       input3: 'TENSION',
+       input4: 'POTENCIA'
        };
 
 
  export const memNameOutputs =
        {
-       output0: 'aceleracion',
-       output1: 'milimetros',
-       output2: 'amper',
-       output3: 'newton',
-       output4: 'angulo'
+       output0: 'ACELERACION',
+       output1: 'MILIMETROS',
+       output2: 'AMPER',
+       output3: 'NEWTON',
+       output4: 'ANGULO'
        };
 
  export const memNameConfig =
        {
-       cfg0: 'pasos',
-       cfg1: 'return',
-       cfg2: 'frenar',
-       cfg3: 'contador1',
-       cfg4: 'contador2',
+       cfg0: 'INPUT0_ADD',
+       cfg1: 'INPUT1_ADD',
+       cfg2: 'INPUT2_ADD',
+       cfg3: 'INPUT3_ADD',
+       cfg4: 'INPUT4_ADD',
       
-       cfg5: '115200',
-       cfg6: 'serie',
-       cfg7: 'mode',
-       cfg8: 'sumar',
-       cfg9: 'salida'
+       cfg5: 'INPUT0_MUL',
+       cfg6: 'INPUT1_MUL',
+       cfg7: 'INPUT2_MUL',
+       cfg8: 'INPUT3_MUL',
+       cfg9: 'INPUT4_MUL'
        };
 
 
