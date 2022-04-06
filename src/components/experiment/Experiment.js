@@ -10,7 +10,7 @@ import {Box, Grid ,Table, TableContainer, TableHead, TableCell, TableBody, Table
 import { Edit } from '@material-ui/icons';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import {  memNameInput } from './MemoryName.js'
+import {  memNameInputs, memNameOutputs } from './MemoryName.js'
 import { fetchWithoutToken } from '../../helpers/fetch';
 import SendIcon from "@material-ui/icons/Send";
 import { Divider } from '@mui/material';
@@ -80,6 +80,7 @@ const Experiment = () => {
   const styles= useStyles();  
   const [modalEdit, setmodalEdit]=useState(false);
   const [memInputs, setMemInputs]= useState([]);   
+  const [memOutputs, setMemOutputs]= useState([]); 
   const [ ipAddress, setIpAddress] = useState('http://192.168.0.103:4000/'); 
   const [ statusLib, setStatusLib ]= useState(false);
   const [ versionLib, setVersionLib ]= useState(false);
@@ -170,8 +171,68 @@ const readResult= async ( ipAddress )=>{
       });
     console.log('Error'); 
   }   
+}
+
+
+const ReadOutputs= async ( ipAddress )=>{    
+  console.log('leyendo');
+  const response = await fetchWithoutToken(`${ ipAddress }read/all-output`);             
+  const body = await response.json(); 
+
+  if(response.status === 200) {            
+
+      
+    console.log(body);
+    setMemOutputs([
+      {
+      uid:   0,
+      name: memNameOutputs.output0,
+      key:   'output0',
+      value: body.output0
+     },
+     {
+      uid:   1,
+      name: memNameOutputs.output1,
+      key:   'output1',
+      value: body.output1
+     },
+     {
+      uid:   2,
+      name: memNameOutputs.output2,
+      key:   'output2',
+      value: body.output2
+     },
+     {
+      uid:   3,
+      name: memNameOutputs.output3,
+      key:   'output3',
+      value: body.output3
+     },
+     {
+      uid:   4,
+      name: memNameOutputs.output4,
+      key:   'output4',
+      value: body.output4
+     },
+     
+
+    ])      
+   
+
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
 
 }
+
+
+
+
   const ReadInputs= async ( ipAddress )=>{    
     console.log('leyendo');
     const response = await fetchWithoutToken(`${ ipAddress }read/all-input`);             
@@ -184,31 +245,31 @@ const readResult= async ( ipAddress )=>{
       setMemInputs([
         {
         uid:   0,
-        name: memNameInput.input0,
+        name: memNameInputs.input0,
         key:   'input0',
         value: body.input0
        },
        {
         uid:   1,
-        name: memNameInput.input1,
+        name: memNameInputs.input1,
         key:   'input1',
         value: body.input1
        },
        {
         uid:   2,
-        name: memNameInput.input2,
+        name: memNameInputs.input2,
         key:   'input2',
         value: body.input2
        },
        {
         uid:   3,
-        name: memNameInput.input3,
+        name: memNameInputs.input3,
         key:   'input3',
         value: body.input3
        },
        {
         uid:   4,
-        name: memNameInput.input4,
+        name: memNameInputs.input4,
         key:   'input4',
         value: body.input4
        },
@@ -464,6 +525,54 @@ const readVersion= async ( ipAddress )=>{
 
 
               <Grid item  sm={4}> 
+
+              <Box 
+                  sx={{      
+                    marginTop: 150,          
+                    background: 'linear-gradient(180deg,#496cb2,#6390e9)',
+                    borderRadius: 15,
+                
+                }}>        
+
+              <Typography
+               align='center'
+              >Memoria arduino: parametros de salida</Typography>
+
+                <TableContainer >
+                  <Table className={styles.table}>
+                      <TableHead >
+                          <TableRow  >
+                            <StyledTableCell>Nombre_ref</StyledTableCell>
+                            <StyledTableCell>Clave_arduino</StyledTableCell>
+                            <StyledTableCell>Valor</StyledTableCell>                                                     
+                          </TableRow>
+                      </TableHead>
+
+                      <TableBody>
+                           
+                          {
+                          memOutputs.map(( console )=>(
+                              <TableRow key={console.uid}>
+                                  <TableCell className={styles.narrowCell}>{console.name}</TableCell>
+                                  <TableCell className={styles.narrowCell}>{console.key}</TableCell>
+                                  <TableCell className={styles.narrowCell}>{console.value}</TableCell>                                 
+                                  
+                              </TableRow>
+                          ))}
+                      </TableBody>
+                  </Table>
+              </TableContainer> 
+
+            
+
+                  <Button
+                  startIcon={<SendIcon />} 
+                  onClick={() => ReadOutputs(ipAddress)}
+                 
+                  >Leer parametros </Button>
+
+                  
+            </Box>  
 
 
               </Grid>
