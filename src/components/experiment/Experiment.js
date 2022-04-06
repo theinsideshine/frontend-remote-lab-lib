@@ -7,12 +7,16 @@ import  Swal from 'sweetalert2';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {Box, Grid ,Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
-import {Edit } from '@material-ui/icons';
+import { Edit } from '@material-ui/icons';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import {  memNameInput } from './MemoryName.js'
 import { fetchWithoutToken } from '../../helpers/fetch';
 import SendIcon from "@material-ui/icons/Send";
+import { Divider } from '@mui/material';
+
+import ReactExport from "react-export-excel";
+
 
 
 
@@ -42,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   iconos:{
     cursor: 'pointer'
   }, 
+
   inputMaterial:{
     width: '100%'
   },
@@ -52,16 +57,25 @@ const useStyles = makeStyles((theme) => ({
   },
   narrowCell: {
     width: 50
-  }
- 
+  },
+   
 }));
-  
+
+
+
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+
+
 
 
 
 const Experiment = () => {
 
+  
 
+ 
 
   const styles= useStyles();  
   const [modalEdit, setmodalEdit]=useState(false);
@@ -69,13 +83,15 @@ const Experiment = () => {
   const [ ipAddress, setIpAddress] = useState('http://192.168.0.103:4000/'); 
   const [ statusLib, setStatusLib ]= useState(false);
   const [ versionLib, setVersionLib ]= useState(false);
-        
+  const [ dataSet1, setDataSet1 ] = useState([]);
   const [selectConsole, setSelectConsole]=useState({
       uid: 0,
       name: '',
       key: '',
       value: ''
   })
+
+
 
   const WriteInputs= async ( ipAddress )=>{    
     console.log('escribiendo');
@@ -107,6 +123,51 @@ const Experiment = () => {
 
 }
 
+
+
+const readResult= async ( ipAddress )=>{    
+  console.log('leyendo');
+  const response = await fetchWithoutToken(`${ ipAddress }read/all-result`);             
+  const body = await response.json(); 
+
+  if(response.status === 200) {   
+    
+   
+    console.log(body); 
+
+    setDataSet1( [
+
+      {result: body.result_0},{result: body.result_1},{result: body.result_2},{result: body.result_3},{result: body.result_4},
+      {result: body.result_5},{result: body.result_6},{result: body.result_7},{result: body.result_8},{result: body.result_9},
+
+      {result: body.result_10},{result: body.result_11},{result: body.result_12},{result: body.result_13},{result: body.result_14},
+      {result: body.result_15},{result: body.result_16},{result: body.result_17},{result: body.result_18},{result: body.result_19},
+
+      {result: body.result_20},{result: body.result_21},{result: body.result_22},{result: body.result_23},{result: body.result_24},
+      {result: body.result_25},{result: body.result_26},{result: body.result_27},{result: body.result_28},{result: body.result_29},
+
+      {result: body.result_30},{result: body.result_31},{result: body.result_32},{result: body.result_33},{result: body.result_34},
+      {result: body.result_35},{result: body.result_36},{result: body.result_37},{result: body.result_38},{result: body.result_39},
+
+      {result: body.result_40},{result: body.result_41},{result: body.result_42},{result: body.result_43},{result: body.result_44},
+      {result: body.result_45},{result: body.result_46},{result: body.result_47},{result: body.result_48},{result: body.result_49},
+      
+    ]);
+
+    console.log(dataSet1); 
+    
+   
+
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
+
+}
   const ReadInputs= async ( ipAddress )=>{    
     console.log('leyendo');
     const response = await fetchWithoutToken(`${ ipAddress }read/all-input`);             
@@ -358,18 +419,34 @@ const readVersion= async ( ipAddress )=>{
                   startIcon={<SendIcon />}
                   onClick={() => startExperiment(ipAddress)}
                   >Empezar experimento </Button>   
-                  <Typography align='center' > <br></br>Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
+                  <Typography align='center' color="#FFFFFF" > <br></br>Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
                   <br></br>
+                  <Divider sx={{ bgcolor: "#FFFFFF" }} />
 
                   <Button
                   startIcon={<SendIcon />}
                   onClick={() => readVersion(ipAddress)}
                   >Leer version </Button> 
-                  <Typography align='center' > <br></br>Version : {versionLib} </Typography>
+                  <Typography align='center' color="#FFFFFF" > <br></br>Version : {versionLib} </Typography>
                   <br></br>
+
+                  <Button
+                  startIcon={<SendIcon />}
+                  onClick={() => readResult(ipAddress)}
+                  >Leer resultados </Button>
+                  <ExcelFile element={<button>Bajar resultados</button>}>
+                    <ExcelSheet data={dataSet1} name="resultados">
+                    <ExcelColumn label="Resultados" value="result"/>
+                  </ExcelSheet>
+               
+            </ExcelFile> 
+                  
+               
+                               
 
                   
               </Box>
+
               <TextField
                       id="ipAddress"
                       fullWidth

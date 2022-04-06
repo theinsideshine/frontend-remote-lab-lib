@@ -8,6 +8,7 @@ import Header from '../../components/UI/Header';
 import ImagePattern from '../../images/fondo.jpg';
 import Experiment from '../../components/experiment/Experiment';
 
+
 export const ExperimentScreen = () => {
   
   return (
