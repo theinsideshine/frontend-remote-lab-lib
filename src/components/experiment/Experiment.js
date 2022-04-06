@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 
 import Typography from '@mui/material/Typography';
 
@@ -91,6 +91,10 @@ const Experiment = () => {
       value: ''
   })
 
+  useEffect(() => {
+    
+    localStorage.setItem('ipAdrress',ipAddress  );
+  },[ipAddress]);
 
 
   const WriteInputs= async ( ipAddress )=>{    

@@ -1,33 +1,18 @@
-import React from 'react'
-import ReactExport from "react-export-excel";
-
+import React,{ useEffect , useState}  from 'react'
 import {Box, Grid }  from '@material-ui/core';
-
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
-
-const dataSet1 = [
-    {
-      result: 70.235 
-     },
-     {
-      result: 71.235 
-     },
-     {
-      result: 72.235 
-     },
-     {
-      result: 73.235 
-     },
-     {
-      result: 74.235 
-     }
-    
-];
+import Typography from '@mui/material/Typography';
 
 
 export const Advanced = () => {
+
+  const [ipAddress, setIpAddress] = useState('');
+
+  useEffect(() => {
+    
+    setIpAddress( localStorage.getItem('ipAdrress'));
+  },[ipAddress]);
+
+
   return (
     <Grid container >
             
@@ -40,12 +25,8 @@ export const Advanced = () => {
                     borderRadius: 15,
                 
                 }}>
-                  <ExcelFile element={<button>Download Data</button>}>
-                    <ExcelSheet data={dataSet1} name="Employees">
-                    <ExcelColumn label="Result" value="result"/>
-                  </ExcelSheet>
-               
-            </ExcelFile>
+                  
+                  <Typography align='center' color="#FFFFFF" > <br></br>ip : {ipAddress} </Typography>
 
               </Box>
             </Grid>      
