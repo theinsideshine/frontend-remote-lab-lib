@@ -494,7 +494,7 @@ const readVersion= async ( ipAddress )=>{
                   >Leer version </Button> 
                   <Typography align='center' color="#FFFFFF" > <br></br>Version : {versionLib} </Typography>
                   <br></br>
-
+                  <Divider sx={{ bgcolor: "#FFFFFF" }} />
                   <Button
                   startIcon={<SendIcon />}
                   onClick={() => readResult(ipAddress)}
@@ -505,20 +505,25 @@ const readVersion= async ( ipAddress )=>{
                   </ExcelSheet>
                
             </ExcelFile> 
-                  
-               
-                               
-
-                  
-              </Box>
-
-              <TextField
+            <br></br>
+            <br></br>
+                  <Divider sx={{ bgcolor: "#FFFFFF" }} />
+            <TextField
                       id="ipAddress"
                       fullWidth
                       label="Ip del servidor"                                            
                       value={ ipAddress }
                       onChange={(e) => setIpAddress(e.target.value)}
                    />
+                <br></br>
+                <br></br>
+                
+                               
+
+                  
+              </Box>
+
+              
               </Grid>
               <Grid item  sm={1}>
               </Grid>

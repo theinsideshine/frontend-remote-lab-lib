@@ -1,1 +1,1 @@
-export  const ver='remote-lab-lib 0.0.03';
+export  const ver='remote-lab-lib 1.0.00';
