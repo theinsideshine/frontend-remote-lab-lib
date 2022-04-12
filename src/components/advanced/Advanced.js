@@ -7,6 +7,8 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import {makeStyles} from '@material-ui/core/styles';
 import SendIcon from "@material-ui/icons/Send";
+import HelpIcon from '@material-ui/icons/Help';
+import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import { Divider } from '@mui/material';
 import { fetchWithoutToken } from '../../helpers/fetch';
 
@@ -66,11 +68,11 @@ export const Advanced = () => {
   const styles= useStyles();  
 
   const [ modalEdit, setmodalEdit ]=useState(false);
-  const [ memConfig, setMemConfig ]= useState([]);  
-  const [ versionLib, setVersionLib ] = useState('');
+  const [ memConfig, setMemConfig ]= useState([]);    
   const [ statusLib, setStatusLib ] = useState('');
-  const [ modeLib, setModeLib ] = useState('');
-  const [ serialLib, setSerialLib ] = useState('');
+  const [ statusServer, setStatusServer ]=useState('');
+  //const [ modeLib, setModeLib ] = useState('');
+  const [ serialLib, setSerialLib ] = useState(true);
   const [ selectConsole, setSelectConsole ]=useState({
     uid: 0,
     name: '',
@@ -80,22 +82,144 @@ export const Advanced = () => {
 
   const [ipAddress, setIpAddress] = useState('');
 
-  const ReadLib= async ( ipAddress )=>{    
-    console.log('leyendo');
-    const response = await fetchWithoutToken(`${ ipAddress }read/all-lib`);             
-    const body = await response.json(); 
-  
-    if(response.status === 200) {            
-  
-        
-      console.log(body);
-      
-     setSerialLib(body.serial_level);
-     setModeLib(body.st_mode);
-     setStatusLib(body.status);
-     setVersionLib(body.version);
   
 
+
+  const helpTestServer=()=>{
+    Swal.fire(
+      'El servidor se encuentra en una ip que expone al levantar',
+      'El servidor no se levanta si no tiene el arduino conectado',
+      'question'
+    )
+  }
+
+  const testServer= async ( ipAddress )=>{    
+  
+    const response = await fetchWithoutToken(`${ ipAddress }ping`);             
+    const body = await response.json(); 
+
+      if ( response.status  === 200 ) {      
+    
+        if (body.message === 'pong!'){
+          setStatusServer(true);
+        }else {
+                setStatusServer(false);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Servidor no encontrado',
+                  text: 'Verifique Ip, verifique conexion servirdor-arduino'                      
+                  });
+              }
+      }
+      else  {
+        setStatusServer(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'Servidor no encontrado',
+          text: 'Verifique Ip, verifique conexion servirdor-arduino'                      
+          });
+
+      }
+  
+     
+  
+  }
+
+  const helpLib=()=>{
+    Swal.fire(
+      'La libreria se encuentra disponible si no se esta ejecutando el experimento',
+      'El modo serial debe estar desactivado. Reinicie el arduino',
+      'question'
+    )
+  }
+
+  const testLib= async ( ipAddress )=>{    
+  
+    const response = await fetchWithoutToken(`${ ipAddress }read/status`);             
+    const body = await response.json(); 
+
+    console.log(body.status);
+
+      if ( response.status  === 200 ) {      
+    
+        if (body.status === 0){
+          setStatusLib(true);
+        }else {
+                setStatusLib(false);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Libreria no encontrada',
+                  text: 'Verifique Servidor, reinicie arduino'                      
+                  });
+              }
+      }
+      else  {
+        setStatusLib(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'Libreria no encontrada',
+          text: 'Verifique Servidor, reinicie arduino'                      
+          });
+
+      }
+  
+     
+  
+  }
+
+  const helpSerial=()=>{
+    Swal.fire(
+      'El modo serial activo se usa para ejecutar el experimento sin conexion al cliente',
+      'Desactive el modo serial. Puede tener problemas aleatorios de conectividad.',
+      'question'
+    )
+  }
+
+  const testSerial= async ( ipAddress )=>{    
+  
+    const response = await fetchWithoutToken(`${ ipAddress }read/serial_level`);             
+    const body = await response.json(); 
+
+    console.log(body.serial_level);
+
+      if ( response.status  === 200 ) {      
+    
+        if (body.serial_level === 1){
+          setSerialLib(true);
+          Swal.fire({
+            icon: 'warning',
+            title: 'El modo serial esta activo',
+            text: 'Desactivelo puede tener problemas de conectividad.'
+          });
+        
+        }else {
+          setSerialLib(false);
+               
+              }
+      } else  {
+        setSerialLib(true);
+          Swal.fire({
+            icon: 'warning',
+            title: 'El modo serial pueder esta activo',
+            text: 'Verifiquelo puede tener problemas de conectividad.'                     
+            });
+
+      }
+  
+     
+  
+  }
+
+  const disableSerial= async ( ipAddress )=>{ 
+    console.log('disableserial');    
+    const data = {};
+    
+    const response = await fetchWithoutToken(`${ ipAddress }save/serial_level`,data,'PUT');             
+    const body = await response.json(); 
+
+    if(response.status === 200) {        
+      console.log(body);
+      Swal.fire('Por favor lea el modo serie');
     } else {
       Swal.fire({
         icon: 'error',
@@ -104,8 +228,9 @@ export const Advanced = () => {
         });
       console.log('Error'); 
     }   
-  
-  }
+
+}
+
 
   const ReadConfig= async ( ipAddress )=>{    
     console.log('leyendo');
@@ -384,24 +509,48 @@ export const Advanced = () => {
                 }}>
                   <Button
                   startIcon={<SendIcon />}
-                  onClick={() => ReadLib(ipAddress)}
-                  >Leer remote-lab-lib </Button>   
-                  <Typography align='center' color="#FFFFFF" > <br></br>Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
-                  <br></br>
+                  onClick={() => testServer(ipAddress)}
+                  >Probar servidor </Button> 
+                  
+                    <Typography align='center' color="#FFFFFF" > <br></br>Conexion : {statusServer? (<>Ok</>) : (<><b>error</b></>)} </Typography>
+                    <Button
+                    startIcon={<HelpIcon />}
+                    onClick={() => helpTestServer()}>
+                    </Button> 
+                  
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
 
                   
-                  <Typography align='center' color="#FFFFFF" > <br></br>Version : {versionLib} </Typography>
-                  <br></br>
+                  <Button
+                  startIcon={<SendIcon />}
+                  onClick={() => testLib(ipAddress)}
+                  >Probar Libreria </Button> 
+                  
+                    <Typography align='center' color="#FFFFFF" > <br></br>Conexion : {statusLib? (<>Ok</>) : (<><b>error</b></>)} </Typography>
+                    <Button
+                    startIcon={<HelpIcon />}
+                    onClick={() => helpLib()}>
+                    </Button> 
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
 
-                  <Typography align='center' color="#FFFFFF" > <br></br>Modo : {modeLib} </Typography>
-                  <br></br>
-                  <Divider sx={{ bgcolor: "#FFFFFF" }} />
+                   
+                  <Button
+                  startIcon={<SendIcon />}
+                  onClick={() => testSerial(ipAddress)}
+                  >Leer MODO SERIE </Button>
+                 
 
-                  <Typography align='center' color="#FFFFFF" > <br></br>Serie : {serialLib? (<>Activo</>) : (<>Desactivado</>)} </Typography>
+                  <Typography align='center' color="#FFFFFF" > <br></br>Modo Serie : {serialLib? (<>Activo</>) : (<>Desactivado</>)} </Typography>
                   <br></br>
-                  <Divider sx={{ bgcolor: "#FFFFFF" }} />
+                  <Button
+                    startIcon={<HelpIcon />}
+                    onClick={() => helpSerial()}>
+                    </Button> 
+                    <Button
+                    startIcon={<DisabledByDefaultIcon />}
+                    onClick={() => disableSerial(ipAddress)}>
+                      Desactivar modo serie
+                    </Button> 
                   
                 <br></br>
                 <br></br>
