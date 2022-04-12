@@ -484,16 +484,16 @@ const readVersion= async ( ipAddress )=>{
                   startIcon={<SendIcon />}
                   onClick={() => startExperiment(ipAddress)}
                   >Empezar experimento </Button>   
-                  <Typography align='center' color="#FFFFFF" > <br></br>Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
-                  <br></br>
+                  <Typography align='center' color="#FFFFFF" > Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
+                  
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
 
                   <Button
                   startIcon={<SendIcon />}
                   onClick={() => readVersion(ipAddress)}
                   >Leer version </Button> 
-                  <Typography align='center' color="#FFFFFF" > <br></br>Version : {versionLib} </Typography>
-                  <br></br>
+                  <Typography align='center' color="#FFFFFF" > Version : {versionLib} </Typography>
+                  
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
                   <Button
                   startIcon={<SendIcon />}

@@ -4,7 +4,7 @@
 // {read:'all-output'}        Envia todos los parametros de salida.
 // {read:'all-cfg'}           Envia todos los parametros de configuracion
 // {read:'all-lib'}           Envia todos los parametros de configuracion de remoteLabLib
-// {read:'all-float'}         Envia todos los parametros de resultados
+// {read:'all-result'}         Envia todos los parametros de resultados
  
 // {read:'version'}           Envia  la version del firmware.
 // {read:'status'}            Devuelve el estatus del ensayo.
@@ -35,11 +35,10 @@
 
 
 
-// {float_0:'70.123'}      float_0      parametro float
-// {float_x:'70.123'}      float_x      parametro float
+// {result0:'70.123'}      result0      parametro float
+// {resultx:'70.123'}      resultx      p
 
 // {st_test:'1'}         st_test       0 ensayo desactivado. 
 //                       st_test       1 ensayo activado. 
-// {st_mode:'0'}         st_mode       ST_MODE_TEST                    0  ensayo activado.
-//                                     ST_MODE_HOME_M2                 1 Va al home del motor 2.
-//                                     ST_MODE_CELL                    2 Lee las celdas de carga.
+// {st_mode:'0'}         st_mode       
+//                                   
