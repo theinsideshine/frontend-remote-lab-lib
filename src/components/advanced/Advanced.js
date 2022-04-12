@@ -257,6 +257,35 @@ const runExample1= async ( ipAddress )=>{
 
 }
 
+const helpExample2=()=>{
+  Swal.fire(
+    'Se configura el blinkeo del led del arduino, ',
+    'Cfg5 = numero de blinks (1-10) ; Cfg6 = tiempo en ms de duracion del blink (100-1000)' ,
+    'question'
+  )
+}
+
+const runExample2= async ( ipAddress )=>{ 
+  console.log('runExample2');    
+  const data = {};
+  
+  const response = await fetchWithoutToken(`${ ipAddress }save/run2`,data,'PUT');             
+  const body = await response.json(); 
+
+  if(response.status === 200) {        
+    console.log(body);
+   
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
+
+}
+
 
   const ReadConfig= async ( ipAddress )=>{    
     console.log('leyendo');
@@ -615,6 +644,18 @@ const runExample1= async ( ipAddress )=>{
                     </Button> 
 
                     <Divider sx={{ bgcolor: "#FFFFFF" }} />
+
+                    <Button
+                    startIcon={<OndemandVideoIcon />}
+                    onClick={() => runExample2(ipAddress)}
+                    >Ejemplo 2 </Button>
+
+                  <br></br>
+                  <Button
+                    startIcon={<HelpIcon />}
+                    onClick={() => helpExample2()}>
+                    </Button> 
+                    
                 </Box>
               </Grid> 
 
