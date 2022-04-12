@@ -9,6 +9,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import SendIcon from "@material-ui/icons/Send";
 import HelpIcon from '@material-ui/icons/Help';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import { Divider } from '@mui/material';
 import { fetchWithoutToken } from '../../helpers/fetch';
 
@@ -60,10 +61,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const Advanced = () => {
-
-
-
-
 
   const styles= useStyles();  
 
@@ -228,6 +225,35 @@ export const Advanced = () => {
         });
       console.log('Error'); 
     }   
+
+}
+
+const helpExample1=()=>{
+  Swal.fire(
+    'Led del arduino blink 5 veces, ',
+    'OutputX = ( InputX + CfgX([0-4] ) + ( 2 * CfgX[5-9] ) si  Input0=10 Cfg0=1 Cfg5= 2 Output0= (10+1)+(2*2)=15' ,
+    'question'
+  )
+}
+
+const runExample1= async ( ipAddress )=>{ 
+  console.log('runExample1');    
+  const data = {};
+  
+  const response = await fetchWithoutToken(`${ ipAddress }save/run1`,data,'PUT');             
+  const body = await response.json(); 
+
+  if(response.status === 200) {        
+    console.log(body);
+   
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
 
 }
 
@@ -564,9 +590,37 @@ export const Advanced = () => {
               </Grid>
               <Grid item  sm={1}>
               </Grid>
+              
+              <Grid item  sm={1}>
+              </Grid>
+              <Grid item  sm={2}> 
 
-            <Grid item  sm={4}            > 
-            </Grid> 
+                <Box 
+                    sx={{      
+                      marginTop: 150,          
+                      background:'linear-gradient(180deg,#496cb2,#6390e9)',
+                      borderRadius: 15,
+                      height: 'auto'
+                  
+                  }}>
+                    <Button
+                    startIcon={<OndemandVideoIcon />}
+                    onClick={() => runExample1(ipAddress)}
+                    >Ejemplo 1 </Button>
+
+                  <br></br>
+                  <Button
+                    startIcon={<HelpIcon />}
+                    onClick={() => helpExample1()}>
+                    </Button> 
+
+                    <Divider sx={{ bgcolor: "#FFFFFF" }} />
+                </Box>
+              </Grid> 
+
+              <Grid item  sm={1}>
+              </Grid>
+
       </Grid>      
   
   
