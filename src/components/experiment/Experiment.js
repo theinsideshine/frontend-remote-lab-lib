@@ -72,11 +72,7 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 
 
-const Experiment = () => {
-
-  
-
- 
+const Experiment = () => { 
 
   const styles= useStyles();  
   const [modalEdit, setmodalEdit]=useState(false);
@@ -100,8 +96,12 @@ const Experiment = () => {
 
 
   const WriteInputs= async ( ipAddress )=>{    
-    console.log('escribiendo');
-    
+    console.log('Escribiendo entradas');
+    console.log(memInputs);
+    if (memInputs.length===0){
+      Swal.fire({  icon: 'error', title: 'Parametros de entradas vacios'});
+      return;
+    }
     const data = {  
 
       input0: memInputs[0].value,
@@ -109,125 +109,138 @@ const Experiment = () => {
       input2: memInputs[2].value,
       input3: memInputs[3].value,
       input4: memInputs[4].value
+      }
+
+    try {          const response = await fetchWithoutToken(`${ ipAddress }save/all-input`,data,'PUT');   
+      
+                    if(!response.ok){
+                      throw Swal.fire({  icon: 'error', title: 'Error Servidor'});
+                    }
     
-    }
-    console.log(data);
-    const response = await fetchWithoutToken(`${ ipAddress }save/all-input`,data,'PUT');             
-    const body = await response.json(); 
+                                      
+                              
+                    const body = await response.json(); 
 
-    if(response.status === 200) {        
-      console.log(body);
+                     if (body.result ==='ok'){       
+                      console.log(body);
+                      Swal.fire({  icon: 'success', title: 'Entradas guardadas'});
 
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-                             
-        });
-      console.log('Error'); 
-    }   
+                    }else  {
+                      Swal.fire({  icon: 'error', title: 'Error Libreria'});
+                      console.log('Error Libreria'); 
+                    }   
+        
+            } catch (err) {
+            console.log(err);
+            } 
 
 }
+
+                
 
 
 
 const readResult= async ( ipAddress )=>{    
-  console.log('leyendo');
-  const response = await fetchWithoutToken(`${ ipAddress }read/all-result`);             
-  const body = await response.json(); 
+  console.log('leyendo resultados');
+  try {
+          const response = await fetchWithoutToken(`${ ipAddress }read/all-result`);  
+          
+          if(!response.ok){
+            throw Swal.fire({  icon: 'error', title: 'Error Servidor'});
+          }
+ 
+ 
+          const body = await response.json(); 
 
-  if(response.status === 200) {   
-    
+          console.log(body);
+          if (body.read ==='all-result'){  
+
+          setDataSet1( [
+
+          {result: body.result0},{result: body.result1},{result: body.result2},{result: body.result3},{result: body.result4},
+          {result: body.result5},{result: body.result6},{result: body.result7},{result: body.result8},{result: body.result9},
+
+          {result: body.result10},{result: body.result11},{result: body.result12},{result: body.result13},{result: body.result14},
+          {result: body.result15},{result: body.result16},{result: body.result17},{result: body.result18},{result: body.result19},
+
+          {result: body.result20},{result: body.result21},{result: body.result22},{result: body.result23},{result: body.result24},
+          {result: body.result25},{result: body.result26},{result: body.result27},{result: body.result28},{result: body.result29},
+
+          {result: body.result30},{result: body.result31},{result: body.result32},{result: body.result33},{result: body.result34},
+          {result: body.result35},{result: body.result36},{result: body.result37},{result: body.result38},{result: body.result39},
+
+          {result: body.result40},{result: body.result41},{result: body.result42},{result: body.result43},{result: body.result44},
+          {result: body.result45},{result: body.result46},{result: body.result47},{result: body.result48},{result: body.result49},
+          
+        ]);
+
+        Swal.fire({  icon: 'success', title: 'Resultados leidos'});  
    
-    console.log(body); 
 
-    setDataSet1( [
-
-      {result: body.result0},{result: body.result1},{result: body.result2},{result: body.result3},{result: body.result4},
-      {result: body.result5},{result: body.result6},{result: body.result7},{result: body.result8},{result: body.result9},
-
-      {result: body.result10},{result: body.result11},{result: body.result12},{result: body.result13},{result: body.result14},
-      {result: body.result15},{result: body.result16},{result: body.result17},{result: body.result18},{result: body.result19},
-
-      {result: body.result20},{result: body.result21},{result: body.result22},{result: body.result23},{result: body.result24},
-      {result: body.result25},{result: body.result26},{result: body.result27},{result: body.result28},{result: body.result29},
-
-      {result: body.result30},{result: body.result31},{result: body.result32},{result: body.result33},{result: body.result34},
-      {result: body.result35},{result: body.result36},{result: body.result37},{result: body.result38},{result: body.result39},
-
-      {result: body.result40},{result: body.result41},{result: body.result42},{result: body.result43},{result: body.result44},
-      {result: body.result45},{result: body.result46},{result: body.result47},{result: body.result48},{result: body.result49},
-      
-    ]);
-
-    console.log(dataSet1); 
-    
-   
-
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-                           
-      });
-    console.log('Error'); 
-  }   
+        }else  {
+          Swal.fire({  icon: 'error', title: 'Error Libreria'});
+          console.log('Error Libreria'); 
+        }   
+} catch (err) {
+  console.log(err);
+ }   
 }
 
 
 const ReadOutputs= async ( ipAddress )=>{    
-  console.log('leyendo');
-  const response = await fetchWithoutToken(`${ ipAddress }read/all-output`);             
-  const body = await response.json(); 
+  console.log('leyendo outputs');
+  try {
+        const response = await fetchWithoutToken(`${ ipAddress }read/all-output`);             
+ 
+        if(!response.ok){
+          throw Swal.fire({  icon: 'error', title: 'Error Servidor'});
+        } 
+ 
+        const body = await response.json(); 
 
-  if(response.status === 200) {            
-
-      
-    console.log(body);
-    setMemOutputs([
-      {
-      uid:   0,
-      name: memNameOutputs.output0,
-      key:   'output0',
-      value: body.output0
-     },
-     {
-      uid:   1,
-      name: memNameOutputs.output1,
-      key:   'output1',
-      value: body.output1
-     },
-     {
-      uid:   2,
-      name: memNameOutputs.output2,
-      key:   'output2',
-      value: body.output2
-     },
-     {
-      uid:   3,
-      name: memNameOutputs.output3,
-      key:   'output3',
-      value: body.output3
-     },
-     {
-      uid:   4,
-      name: memNameOutputs.output4,
-      key:   'output4',
-      value: body.output4
-     },
-     
-
-    ])      
+        console.log(body);
+        if (body.read ==='all-output'){       
    
-
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-                           
-      });
-    console.log('Error'); 
-  }   
+            setMemOutputs([
+              {
+              uid:   0,
+              name: memNameOutputs.output0,
+              key:   'output0',
+              value: body.output0
+            },
+            {
+              uid:   1,
+              name: memNameOutputs.output1,
+              key:   'output1',
+              value: body.output1
+            },
+            {
+              uid:   2,
+              name: memNameOutputs.output2,
+              key:   'output2',
+              value: body.output2
+            },
+            {
+              uid:   3,
+              name: memNameOutputs.output3,
+              key:   'output3',
+              value: body.output3
+            },
+            {
+              uid:   4,
+              name: memNameOutputs.output4,
+              key:   'output4',
+              value: body.output4
+            },
+            ])
+            Swal.fire({  icon: 'success', title: 'Salidas leidas'});
+          }else  {
+            Swal.fire({  icon: 'error', title: 'Error Libreria'});
+            console.log('Error Libreria'); 
+          }   
+        } catch (err) {
+          console.log(err);
+         }     
 
 }
 
@@ -235,109 +248,122 @@ const ReadOutputs= async ( ipAddress )=>{
 
 
   const ReadInputs= async ( ipAddress )=>{    
-    console.log('leyendo');
-    const response = await fetchWithoutToken(`${ ipAddress }read/all-input`);             
-    const body = await response.json(); 
+    console.log('leyendo entradas');
+    try {      
+                const response = await fetchWithoutToken(`${ ipAddress }read/all-input`);                             
 
-    if(response.status === 200) {            
+                if(!response.ok){
+                  throw Swal.fire({  icon: 'error', title: 'Error Servidor'});
+                }    
+                          const body = await response.json(); 
+                          console.log(body);
+                          if (body.read ==='all-input'){
 
-        
-    
-      setMemInputs([
-        {
-        uid:   0,
-        name: memNameInputs.input0,
-        key:   'input0',
-        value: body.input0
-       },
-       {
-        uid:   1,
-        name: memNameInputs.input1,
-        key:   'input1',
-        value: body.input1
-       },
-       {
-        uid:   2,
-        name: memNameInputs.input2,
-        key:   'input2',
-        value: body.input2
-       },
-       {
-        uid:   3,
-        name: memNameInputs.input3,
-        key:   'input3',
-        value: body.input3
-       },
-       {
-        uid:   4,
-        name: memNameInputs.input4,
-        key:   'input4',
-        value: body.input4
-       },
+                            setMemInputs([
+                              {
+                              uid:   0,
+                              name: memNameInputs.input0,
+                              key:   'input0',
+                              value: body.input0
+                            },
+                            {
+                              uid:   1,
+                              name: memNameInputs.input1,
+                              key:   'input1',
+                              value: body.input1
+                            },
+                            {
+                              uid:   2,
+                              name: memNameInputs.input2,
+                              key:   'input2',
+                              value: body.input2
+                            },
+                            {
+                              uid:   3,
+                              name: memNameInputs.input3,
+                              key:   'input3',
+                              value: body.input3
+                            },
+                            {
+                              uid:   4,
+                              name: memNameInputs.input4,
+                              key:   'input4',
+                              value: body.input4
+                            },
+                      
+                            ])  
+                            Swal.fire({  icon: 'success', title: 'Entradas leidas'});
 
-      ])      
-     
-
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-                             
-        });
-      console.log('Error'); 
-    }   
+                          }else  {
+                          Swal.fire({  icon: 'error', title: 'Error Libreria'});
+                          console.log('Error Libreria'); 
+                        }   
+            
+   } catch (err) {
+    console.log(err);
+   } 
 
 }
 
 
 const startExperiment= async ( ipAddress )=>{   
   setStatusLib(true); 
-  
-  const response = await fetchWithoutToken(`${ ipAddress }cmd/start`,0,'PUT');             
-  const body = await response.json(); 
+  console.log('Empezando experimento.')
+  try { 
+            const response = await fetchWithoutToken(`${ ipAddress }cmd/start`);   
+            if(!response.ok){
+              throw Swal.fire({  icon: 'error', title: 'Error Servidor'});
+            }   
+            
+            const body = await response.json(); 
 
-  if(response.status === 200) {            
+            console.log(body);
+            if (body.st_test === 0){ 
+            setStatusLib(false); 
+            Swal.fire({  icon: 'success', title: 'Experimento ejecutado'});
 
-      console.log(body);
-        
-      setStatusLib(false); 
+        } else  {
+          Swal.fire({  icon: 'error', title: 'Error Libreria'});
+          console.log('Error Libreria'); 
+        }   
 
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-                           
-      });
-    console.log('Error'); 
-  }   
+      } catch (err) {
+      console.log(err);
+      } 
 
 }
 
-const readVersion= async ( ipAddress )=>{    
+const readVersion= async ( ipAddress )=>{ 
+  console.log('Leyendo version')
+  try {  
   
-  const response = await fetchWithoutToken(`${ ipAddress }read/version`);             
-  const body = await response.json(); 
+        const response = await fetchWithoutToken(`${ ipAddress }read/version`);  
+        if(!response.ok){
+          throw Swal.fire({  icon: 'error', title: 'Error Servidor'});
+        }            
 
-  if(response.status === 200) {            
+        const body = await response.json(); 
+       
+
+        if (body.read === 'version'){            
 
       console.log(body);
       setVersionLib(body.version);
-   
+      Swal.fire({  icon: 'success', title: 'Version leida'});   
 
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-                           
-      });
-    console.log('Error'); 
-  }   
+      } 
+        else  {
+          Swal.fire({  icon: 'error', title: 'Error Libreria'});
+          console.log('Error Libreria'); 
+        }   
+
+    } catch (err) {
+    console.log(err);
+    }  
 
 }
 
 
-
- 
   
 
   const handleChange=e=>{

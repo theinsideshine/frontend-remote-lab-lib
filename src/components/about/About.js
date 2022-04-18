@@ -29,7 +29,7 @@ export const About = () => {
                  entre una página web y una plataforma arduino, para poder persistir<br></br>
                  en la memoria no volátil del arduino y manejar comandos para empezar <br></br> 
                  ,terminar el experimento.<br></br>
-                Con el obejtivo de tener un herramienta para comuicarse via web<br></br>
+                Con el objetivo de tener una herramienta para comunicarse via web<br></br>
                  y que el usuario se enfoque en el desarrollo del experimento con arduino.
                 <br></br><br></br>
                 <b>Repositorio:</b><br></br>
