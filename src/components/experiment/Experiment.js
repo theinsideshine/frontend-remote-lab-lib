@@ -142,20 +142,20 @@ const readResult= async ( ipAddress )=>{
 
     setDataSet1( [
 
-      {result: body.result_0},{result: body.result_1},{result: body.result_2},{result: body.result_3},{result: body.result_4},
-      {result: body.result_5},{result: body.result_6},{result: body.result_7},{result: body.result_8},{result: body.result_9},
+      {result: body.result0},{result: body.result1},{result: body.result2},{result: body.result3},{result: body.result4},
+      {result: body.result5},{result: body.result6},{result: body.result7},{result: body.result8},{result: body.result9},
 
-      {result: body.result_10},{result: body.result_11},{result: body.result_12},{result: body.result_13},{result: body.result_14},
-      {result: body.result_15},{result: body.result_16},{result: body.result_17},{result: body.result_18},{result: body.result_19},
+      {result: body.result10},{result: body.result11},{result: body.result12},{result: body.result13},{result: body.result14},
+      {result: body.result15},{result: body.result16},{result: body.result17},{result: body.result18},{result: body.result19},
 
-      {result: body.result_20},{result: body.result_21},{result: body.result_22},{result: body.result_23},{result: body.result_24},
-      {result: body.result_25},{result: body.result_26},{result: body.result_27},{result: body.result_28},{result: body.result_29},
+      {result: body.result20},{result: body.result21},{result: body.result22},{result: body.result23},{result: body.result24},
+      {result: body.result25},{result: body.result26},{result: body.result27},{result: body.result28},{result: body.result29},
 
-      {result: body.result_30},{result: body.result_31},{result: body.result_32},{result: body.result_33},{result: body.result_34},
-      {result: body.result_35},{result: body.result_36},{result: body.result_37},{result: body.result_38},{result: body.result_39},
+      {result: body.result30},{result: body.result31},{result: body.result32},{result: body.result33},{result: body.result34},
+      {result: body.result35},{result: body.result36},{result: body.result37},{result: body.result38},{result: body.result39},
 
-      {result: body.result_40},{result: body.result_41},{result: body.result_42},{result: body.result_43},{result: body.result_44},
-      {result: body.result_45},{result: body.result_46},{result: body.result_47},{result: body.result_48},{result: body.result_49},
+      {result: body.result40},{result: body.result41},{result: body.result42},{result: body.result43},{result: body.result44},
+      {result: body.result45},{result: body.result46},{result: body.result47},{result: body.result48},{result: body.result49},
       
     ]);
 

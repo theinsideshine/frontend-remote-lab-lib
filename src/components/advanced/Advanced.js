@@ -286,6 +286,63 @@ const runExample2= async ( ipAddress )=>{
 
 }
 
+const helpExample3=()=>{
+  Swal.fire(
+    'Se genera una recta de pendiente 1 en los resultados ',
+    'Ir a experimento LEER RESULTADOS y bajar resultados' ,
+    'question'
+  )
+}
+
+const runExample3= async ( ipAddress )=>{ 
+  console.log('runExample4');    
+  const data = {};
+  
+  const response = await fetchWithoutToken(`${ ipAddress }save/run3`,data,'PUT');             
+  const body = await response.json(); 
+
+  if(response.status === 200) {        
+    console.log(body);
+   
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
+
+}
+
+const helpExample4=()=>{
+  Swal.fire(
+    'Se genera una recta de pendiente -1 en los resultados ',
+    'Ir a experimento LEER RESULTADOS y bajar resultados' ,
+    'question'
+  )
+}
+
+const runExample4= async ( ipAddress )=>{ 
+  console.log('runExample4');    
+  const data = {};
+  
+  const response = await fetchWithoutToken(`${ ipAddress }save/run4`,data,'PUT');             
+  const body = await response.json(); 
+
+  if(response.status === 200) {        
+    console.log(body);
+   
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+                           
+      });
+    console.log('Error'); 
+  }   
+
+}
 
   const ReadConfig= async ( ipAddress )=>{    
     console.log('leyendo');
@@ -654,6 +711,30 @@ const runExample2= async ( ipAddress )=>{
                   <Button
                     startIcon={<HelpIcon />}
                     onClick={() => helpExample2()}>
+                    </Button> 
+                    <Divider sx={{ bgcolor: "#FFFFFF" }} />
+
+                    <Button
+                    startIcon={<OndemandVideoIcon />}
+                    onClick={() => runExample3(ipAddress)}
+                    >Ejemplo 3 </Button>
+
+                  <br></br>
+                  <Button
+                    startIcon={<HelpIcon />}
+                    onClick={() => helpExample3()}>
+                    </Button> 
+                    <Divider sx={{ bgcolor: "#FFFFFF" }} />
+                    
+                    <Button
+                    startIcon={<OndemandVideoIcon />}
+                    onClick={() => runExample4(ipAddress)}
+                    >Ejemplo 4 </Button>
+
+                  <br></br>
+                  <Button
+                    startIcon={<HelpIcon />}
+                    onClick={() => helpExample4()}>
                     </Button> 
                     
                 </Box>

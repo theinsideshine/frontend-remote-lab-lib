@@ -34,6 +34,10 @@ export const About = () => {
                 <br></br><br></br>
                 <b>Repositorio:</b><br></br>
                 https://github.com/theinsideshine/frontend-remote-lab-lib 
+                <br></br>
+                https://github.com/theinsideshine/back-end-remote-lab-lib
+                <br></br>
+                https://github.com/theinsideshine/remote-lab-lib 
                 <br></br><br></br>
                 <b> Contactos:</b> <br></br> LC: leandro.cintioli@alumnos.udemm.edu.ar <br></br>
                                      PT: pablo.tavolaro@alumnos.udemm.edu.ar
