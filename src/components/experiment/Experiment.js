@@ -10,12 +10,13 @@ import {Box, Grid ,Table, TableContainer, TableHead, TableCell, TableBody, Table
 import { Edit } from '@material-ui/icons';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import {  memNameInputs, memNameOutputs } from './MemoryName.js'
+import {  memNameInputs, memNameOutputs, strConection } from './MemoryName.js'
 import { fetchWithoutToken } from '../../helpers/fetch';
 import SendIcon from "@material-ui/icons/Send";
 import { Divider } from '@mui/material';
 
 import ReactExport from "react-export-excel";
+
 
 
 
@@ -81,7 +82,7 @@ const Experiment = () => {
   const [modalEdit, setmodalEdit]=useState(false);
   const [memInputs, setMemInputs]= useState([]);   
   const [memOutputs, setMemOutputs]= useState([]); 
-  const [ ipAddress, setIpAddress] = useState('http://192.168.0.103:4000/'); 
+  const [ ipAddress, setIpAddress] = useState(strConection); 
   const [ statusLib, setStatusLib ]= useState(false);
   const [ versionLib, setVersionLib ]= useState(false);
   const [ dataSet1, setDataSet1 ] = useState([]);
