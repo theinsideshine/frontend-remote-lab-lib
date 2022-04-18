@@ -230,7 +230,7 @@ export const Advanced = () => {
 
 const helpExample1=()=>{
   Swal.fire(
-    'Led del arduino blink 5 veces, ',
+    'Uso de la memoria del arduino. ',
     'OutputX = ( InputX + CfgX([0-4] ) + ( 2 * CfgX[5-9] ) si  Input0=10 Cfg0=1 Cfg5= 2 Output0= (10+1)+(2*2)=15' ,
     'question'
   )
@@ -288,7 +288,7 @@ const runExample2= async ( ipAddress )=>{
 
 const helpExample3=()=>{
   Swal.fire(
-    'Se genera una recta de pendiente 1 en los resultados ',
+    'Se genera una recta de pendiente 1 en la memoria resultados ',
     'Ir a experimento LEER RESULTADOS y bajar resultados' ,
     'question'
   )
@@ -317,7 +317,7 @@ const runExample3= async ( ipAddress )=>{
 
 const helpExample4=()=>{
   Swal.fire(
-    'Se genera una recta de pendiente -1 en los resultados ',
+    'Se genera una recta de pendiente -1 en en la memoria resultados ',
     'Ir a experimento LEER RESULTADOS y bajar resultados' ,
     'question'
   )
