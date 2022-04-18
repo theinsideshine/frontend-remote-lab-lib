@@ -13,9 +13,9 @@ export const Copyright=() => {
         <br></br>
         <br></br>
         <br></br>
-        {'Copyright © '}
-        <Link color="inherit" href="http://remotelab.com.ar/">
-          RemoteLab
+        {'Proyecto:'}
+        <Link color="inherit" href="https://github.com/theinsideshine/frontend-remote-lab-lib">
+          RemoteLab-Lib
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}

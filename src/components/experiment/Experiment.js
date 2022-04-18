@@ -431,19 +431,16 @@ const readVersion= async ( ipAddress )=>{
       
           <Grid container >
             
-            <Grid item  sm={4}>            
-            
+            <Grid item xs={12} sm={4}>              
               <Box 
                   sx={{      
                     marginTop: 150,          
                     background: 'linear-gradient(180deg,#496cb2,#6390e9)',
-                    borderRadius: 15,
-                
+                    borderRadius: 15                
                 }}>        
 
-              <Typography
-               align='center'
-              >Memoria arduino: parametros de entrada</Typography>
+              <Typography align='center'>
+                Memoria arduino: parametros de entrada</Typography>
 
                 <TableContainer >
                   <Table className={styles.table}>
@@ -456,8 +453,7 @@ const readVersion= async ( ipAddress )=>{
                           </TableRow>
                       </TableHead>
 
-                      <TableBody>
-                           
+                      <TableBody>                           
                           {
                           memInputs.map(( console )=>(
                               <TableRow key={console.uid}>
@@ -481,11 +477,9 @@ const readVersion= async ( ipAddress )=>{
 
                   <Button
                   startIcon={<SendIcon />} 
-                  onClick={() => ReadInputs(ipAddress)}
-                 
+                  onClick={() => ReadInputs(ipAddress)}                 
                   >Leer parametros </Button>
 
-                  
             </Box>  
 
               <Modal
@@ -493,11 +487,12 @@ const readVersion= async ( ipAddress )=>{
                 onClose={openClosemodalEdit}>
                 {bodyEdit}
               </Modal>
-              </Grid>      
+            </Grid>      
              
-              <Grid item  sm={1}>
-              </Grid>
-              <Grid item  sm={2}> 
+            <Grid item  xs={1} sm={1}>
+            </Grid>
+
+            <Grid item  xs={10} sm={2}> 
 
               <Box 
                   sx={{      
@@ -509,9 +504,10 @@ const readVersion= async ( ipAddress )=>{
                 }}>
                   <Button
                   startIcon={<SendIcon />}
-                  onClick={() => startExperiment(ipAddress)}
-                  >Empezar experimento </Button>   
-                  <Typography align='center' color="#FFFFFF" > Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
+                  onClick={() => startExperiment(ipAddress)}>
+                  Empezar experimento </Button>   
+                  <Typography align='center' color="#FFFFFF"> 
+                  Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
                   
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
 
@@ -519,56 +515,49 @@ const readVersion= async ( ipAddress )=>{
                   startIcon={<SendIcon />}
                   onClick={() => readVersion(ipAddress)}
                   >Leer version </Button> 
-                  <Typography align='center' color="#FFFFFF" > Version : {versionLib} </Typography>
+                  <Typography align='center' color="#FFFFFF">
+                   Version : {versionLib} </Typography>
                   
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
+                  
                   <Button
                   startIcon={<SendIcon />}
                   onClick={() => readResult(ipAddress)}
                   >Leer resultados </Button>
                   <ExcelFile element={<button>Bajar resultados</button>}>
                     <ExcelSheet data={dataSet1} name="resultados">
-                    <ExcelColumn label="Resultados" value="result"/>
-                  </ExcelSheet>
-               
-            </ExcelFile> 
+                       <ExcelColumn label="Resultados" value="result"/>
+                    </ExcelSheet>
+                  </ExcelFile> 
             <br></br>
             <br></br>
+
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
             <TextField
                       id="ipAddress"
                       fullWidth
                       label="Ip del servidor"                                            
                       value={ ipAddress }
-                      onChange={(e) => setIpAddress(e.target.value)}
-                   />
+                      onChange={(e) => setIpAddress(e.target.value)}/>
                 <br></br>
-                <br></br>
-                
-                               
+                <br></br>            
+              </Box>              
+            </Grid>
 
-                  
-              </Box>
+            <Grid item xs={1} sm={1}>
+            </Grid>
 
-              
-              </Grid>
-              <Grid item  sm={1}>
-              </Grid>
-
-
-              <Grid item  sm={4}> 
+            <Grid item  xs={12} sm={4}> 
 
               <Box 
                   sx={{      
                     marginTop: 150,          
                     background: 'linear-gradient(180deg,#496cb2,#6390e9)',
-                    borderRadius: 15,
-                
+                    borderRadius: 15                
                 }}>        
 
-              <Typography
-               align='center'
-              >Memoria arduino: parametros de salida</Typography>
+              <Typography align='center'>
+              Memoria arduino: parametros de salida</Typography>
 
                 <TableContainer >
                   <Table className={styles.table}>
@@ -579,41 +568,28 @@ const readVersion= async ( ipAddress )=>{
                             <StyledTableCell>Valor</StyledTableCell>                                                     
                           </TableRow>
                       </TableHead>
-
-                      <TableBody>
-                           
+                      <TableBody>                           
                           {
                           memOutputs.map(( console )=>(
                               <TableRow key={console.uid}>
                                   <TableCell className={styles.narrowCell}>{console.name}</TableCell>
                                   <TableCell className={styles.narrowCell}>{console.key}</TableCell>
                                   <TableCell className={styles.narrowCell}>{console.value}</TableCell>                                 
-                                  
                               </TableRow>
                           ))}
                       </TableBody>
                   </Table>
-              </TableContainer> 
+              </TableContainer>             
 
-            
+              <Button
+              startIcon={<SendIcon />} 
+              onClick={() => ReadOutputs(ipAddress)}>
+              Leer parametros </Button>
 
-                  <Button
-                  startIcon={<SendIcon />} 
-                  onClick={() => ReadOutputs(ipAddress)}
-                 
-                  >Leer parametros </Button>
-
-                  
             </Box>  
-
-
-              </Grid>
-    
-              
-              
           </Grid>
-        
-        
+        </Grid>
+         
   );    
 }
 

@@ -447,19 +447,16 @@ const runExample= async ( strRoute )=>{
   return (
     <Grid container >
             
-           <Grid item  sm={4}>            
-            
+           <Grid item  sx={12} sm={4}>          
               <Box 
                   sx={{      
                     marginTop: 150,          
                     background: 'linear-gradient(180deg,#496cb2,#6390e9)',
-                    borderRadius: 15,
-                
+                    borderRadius: 15                
                 }}>
                   
-                  <Typography
-               align='center'
-              >Memoria arduino: parametros de configuracion</Typography>
+                  <Typography align='center'>
+                  Memoria arduino: parametros de configuracion</Typography>
 
                 <TableContainer >
                   <Table className={styles.table}>
@@ -472,8 +469,7 @@ const runExample= async ( strRoute )=>{
                           </TableRow>
                       </TableHead>
 
-                      <TableBody>
-                           
+                      <TableBody>                           
                           {
                           memConfig.map(( console )=>(
                               <TableRow key={console.uid}>
@@ -491,16 +487,14 @@ const runExample= async ( strRoute )=>{
               </TableContainer> 
 
               <Button
-                  startIcon={<SendIcon />}
-                  onClick={() => WriteConfig(ipAddress)}
-                  >Grabar parametros </Button>
+              startIcon={<SendIcon />}
+              onClick={() => WriteConfig(ipAddress)}>
+              Grabar parametros </Button>
 
-                  <Button
-                  startIcon={<SendIcon />} 
-                  onClick={() => ReadConfig()}
-                 
-                  >Leer parametros </Button>
-
+              <Button
+              startIcon={<SendIcon />} 
+              onClick={() => ReadConfig()}>
+                Leer parametros </Button>
                   
             </Box>  
 
@@ -510,96 +504,96 @@ const runExample= async ( strRoute )=>{
                 {bodyEdit}
               </Modal>
 
-            </Grid>    
-            <Grid item  sm={1}>
-              </Grid>
-              <Grid item  sm={2}> 
+          </Grid>   
 
-              <Box 
-                  sx={{      
-                    marginTop: 150,          
-                    background:'linear-gradient(180deg,#496cb2,#6390e9)',
-                    borderRadius: 15,
-                    height: 'auto'
-                
-                }}>
-                  <Button
-                  startIcon={<SendIcon />}
-                  onClick={() => testConection(srtTestServer)}
-                  >Probar servidor </Button> 
-                  
-                    <Typography align='center' color="#FFFFFF" > <br></br>Conexion : {statusServer? (<>Ok</>) : (<><b>error</b></>)} </Typography>
-                    <Button
-                    startIcon={<HelpIcon />}
-                    onClick={() => helpTestServer()}>
-                    </Button> 
-                  
-                  <Divider sx={{ bgcolor: "#FFFFFF" }} />
+            <Grid item  xs={1} sm={1}>
+            </Grid>
 
-                  
-                  <Button
-                  startIcon={<SendIcon />}
-                  onClick={() => testConection(srtTestLib)}
-                  >Probar Libreria </Button> 
-                  
-                    <Typography align='center' color="#FFFFFF" > <br></br>Conexion : {statusLib? (<>Ok</>) : (<><b>error</b></>)} </Typography>
-                    <Button
-                    startIcon={<HelpIcon />}
-                    onClick={() => helpLib()}>
-                    </Button> 
-                  <Divider sx={{ bgcolor: "#FFFFFF" }} />
+            <Grid item  xs={10} sm={2}>  
 
-                   
-                  <Button
-                  startIcon={<SendIcon />}
-                  onClick={() => testConection(srtTestSerial)}
-                  >Leer MODO SERIE </Button>
-                 
+                  <Box 
+                      sx={{      
+                        marginTop: 150,          
+                        background:'linear-gradient(180deg,#496cb2,#6390e9)',
+                        borderRadius: 15,
+                        height: 'auto'                
+                    }}>
 
-                  <Typography align='center' color="#FFFFFF" > <br></br>Modo Serie : {serialLib? (<>Activo</>) : (<>Desactivado</>)} </Typography>
-                  <br></br>
-                  <Button
-                    startIcon={<HelpIcon />}
-                    onClick={() => helpSerial()}>
-                    </Button> 
-                    <Button
-                    startIcon={<DisabledByDefaultIcon />}
-                    onClick={() => testConection(srtDisableSerial)}>
-                      Desactivar modo serie
-                    </Button> 
-                  
-                <br></br>
-                <br></br>
-                
-                               
+                      <Button
+                      startIcon={<SendIcon />}
+                      onClick={() => testConection(srtTestServer)}
+                      >Probar servidor </Button> 
+                      
+                      <Typography align='center' color="#FFFFFF">
+                        <br></br>Conexion : {statusServer? (<>Ok</>) : (<><b>error</b></>)} </Typography>
+                      <Button
+                      startIcon={<HelpIcon />}
+                      onClick={() => helpTestServer()}>
+                      </Button> 
+                      
+                      <Divider sx={{ bgcolor: "#FFFFFF" }} />
+                      
+                      <Button
+                      startIcon={<SendIcon />}
+                      onClick={() => testConection(srtTestLib)}>
+                        Probar Libreria </Button> 
+                      
+                      <Typography align='center' color="#FFFFFF">
+                          <br></br>Conexion : {statusLib? (<>Ok</>) : (<><b>error</b></>)} </Typography>
+                          
+                      <Button
+                      startIcon={<HelpIcon />}
+                      onClick={() => helpLib()}>
+                      </Button> 
+                      <Divider sx={{ bgcolor: "#FFFFFF" }} />
+                      
+                      <Button
+                      startIcon={<SendIcon />}
+                      onClick={() => testConection(srtTestSerial)}
+                      >leer modo serie </Button>                 
 
-                  
-              </Box>
+                      <Typography align='center' color="#FFFFFF">
+                        <br></br>Modo Serie : {serialLib? (<>Activo</>) : (<>Desactivado</>)} </Typography>
+                      <br></br>
+                      <Button
+                        startIcon={<HelpIcon />}
+                        onClick={() => helpSerial()}>
+                        </Button> 
 
+                        <Button
+                        startIcon={<DisabledByDefaultIcon />}
+                        onClick={() => testConection(srtDisableSerial)}>
+                          Desactivar modo serie
+                        </Button>                   
+                    <br></br>
+                    <br></br>
+
+                  </Box>              
+            </Grid>
+
+            <Grid item xs={1} sm={1}>
+            </Grid>
               
-              </Grid>
-              <Grid item  sm={1}>
-              </Grid>
               
-              <Grid item  sm={1}>
-              </Grid>
-              <Grid item  sm={2}> 
+            <Grid item  xs={1} sm={1}>
+            </Grid>
+
+            <Grid item  xs={10} sm={2}> 
 
                 <Box 
                     sx={{      
                       marginTop: 150,          
                       background:'linear-gradient(180deg,#496cb2,#6390e9)',
                       borderRadius: 15,
-                      height: 'auto'
-                  
+                      height: 'auto'                  
                   }}>
+
                     <Button
                     startIcon={<OndemandVideoIcon />}
                     onClick={() => runExample('run1')}
                     >Ejemplo 1 </Button>
-
-                  <br></br>
-                  <Button
+                    <br></br>
+                    <Button
                     startIcon={<HelpIcon />}
                     onClick={() => helpExample1()}>
                     </Button> 
@@ -608,10 +602,10 @@ const runExample= async ( strRoute )=>{
 
                     <Button
                     startIcon={<OndemandVideoIcon />}
-                    onClick={() => runExample('run2')}
-                    >Ejemplo 2 </Button>
-
+                    onClick={() => runExample('run2')}>
+                      Ejemplo 2 </Button>
                   <br></br>
+
                   <Button
                     startIcon={<HelpIcon />}
                     onClick={() => helpExample2()}>
@@ -620,10 +614,10 @@ const runExample= async ( strRoute )=>{
 
                     <Button
                     startIcon={<OndemandVideoIcon />}
-                    onClick={() => runExample('run3')}
-                    >Ejemplo 3 </Button>
-
+                    onClick={() => runExample('run3')}>
+                      Ejemplo 3 </Button>
                   <br></br>
+
                   <Button
                     startIcon={<HelpIcon />}
                     onClick={() => helpExample3()}>
@@ -639,16 +633,15 @@ const runExample= async ( strRoute )=>{
                   <Button
                     startIcon={<HelpIcon />}
                     onClick={() => helpExample4()}>
-                    </Button> 
-                    
+                    </Button>                     
                 </Box>
               </Grid> 
 
-              <Grid item  sm={1}>
-              </Grid>
+              <Grid item xs={1} sm={1}>
+            </Grid>
 
-      </Grid>      
-  
-  
+             
+
+      </Grid>   
   )
 }
