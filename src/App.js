@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import {ExperimentScreen} from './screen/app/ExperimentScreen';
 import {AdvancedScreen} from './screen/app/AdvancedScreen';
+import {AboutScreen} from './screen/app/AboutScreen';
 
 
 
@@ -34,6 +35,7 @@ export default function App() {
             <Switch>
                         <Route exact path="/" component={ ExperimentScreen }/>
                         <Route exact path="/avanzado" component={AdvancedScreen}/>
+                        <Route exact path="/about" component={AboutScreen}/>
                        
             </Switch>
             </Router>

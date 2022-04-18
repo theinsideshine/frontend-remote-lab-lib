@@ -7,7 +7,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import SendIcon from "@material-ui/icons/Send";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -73,6 +73,11 @@ const Header = props => {
       menuTitle: "AVANZADO",
       pageURL: "/avanzado"
     }
+    ,
+    {
+      menuTitle: "NOSOTROS",
+      pageURL: "/about"
+    }
     
   ];
 
@@ -136,7 +141,7 @@ const Header = props => {
                   const { menuTitle, pageURL } = menuItem;
                   return (                    
                         <Button 
-                        startIcon={<SendIcon />}
+                        startIcon={<ArrowDropDownIcon />}
                         color='primary'
                           sx={{ my: 2,}}
                           key={index}
