@@ -12,3 +12,5 @@ Los módulos principales de son tres: front-end, back-end y librerías Arduino.
 
 
 [Intencion del proyecto](https://youtu.be/-bFDZmKrt8A)
+
+[Demo de integracion de experimento](https://www.youtube.com/watch?v=U23sJfh_hjU)

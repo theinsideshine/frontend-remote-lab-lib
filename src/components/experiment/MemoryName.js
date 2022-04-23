@@ -5,7 +5,7 @@ export const memNameInputs =
        input0: 'FUERZA',
        input1: 'PESO',
        input2: 'ENERGIA',
-       input3: 'TENSION',
+       input3: 'DISTANCIA',
        input4: 'POTENCIA'
        };
 
@@ -15,7 +15,7 @@ export const memNameInputs =
        output0: 'ACELERACION',
        output1: 'MILIMETROS',
        output2: 'AMPER',
-       output3: 'NEWTON',
+       output3: 'TIEMPO',
        output4: 'ANGULO'
        };
 
@@ -24,7 +24,7 @@ export const memNameInputs =
        cfg0: 'INPUT0_ADD',
        cfg1: 'INPUT1_ADD',
        cfg2: 'INPUT2_ADD',
-       cfg3: 'INPUT3_ADD',
+       cfg3: 'CFG3',
        cfg4: 'INPUT4_ADD',
       
        cfg5: 'INPUT0_MUL',
