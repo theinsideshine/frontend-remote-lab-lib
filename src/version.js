@@ -8,4 +8,5 @@
 //         Se puso verificacion de array vacio al grabar 
 // v2.0.01 Responsive breakpoint
 // v2.0.02 add pdf msj about
-export  const ver='remote-lab-lib 2.0.02';
+// V2.0.03 add snackbar
+export  const ver='remote-lab-lib 2.0.03';
