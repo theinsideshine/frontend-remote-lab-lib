@@ -20,16 +20,13 @@ export const About = () => {
                   <Typography
                   sx={{color: '#FFFFFF'}}                 
                   align='center'>
-                 <br></br><b> Interfaz FrontEnd-Arduino para laboratorio remoto</b>
+                 <br></br><b> Interfaz Cliente-Arduino para laboratorio remoto</b>
                  <br></br><br></br>
-             
-                La intención de este proyecto  es suministrar una interfaz <br></br>
-                 entre una página web y una plataforma arduino, para poder persistir<br></br>
-                 en la memoria no volátil del arduino(EEPROM),  <br></br>
-                 manejando comandos para empezar y terminar el experimento,<br></br>
-                 y asi contar con una herramienta para comunicarse via web.<br></br>
-                 Dando lugar al usuario a enfocarse en el desarrollo <br></br>
-                 del experimento con arduino.
+                 La intención del proyecto es suministrar una interfaz entre una página web <br></br> 
+                 y una plataforma Arduino, que acepta los comandos para empezar y terminar el experimento,<br></br>
+                 y almacena los valores de configuración en la memoria no volátil de la placa.<br></br>
+                Los módulos principales de son tres: Cliente , Servidor  y librerías Arduino.
+               
                 <br></br>
                 <b>Repositorio:</b><br></br>
                 https://github.com/theinsideshine/frontend-remote-lab-lib 

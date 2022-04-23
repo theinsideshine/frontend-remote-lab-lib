@@ -6,3 +6,9 @@ valores de configuración en la memoria no volátil de la placa.
 Los módulos principales de son tres: front-end, back-end y librerías Arduino.
 
 [Instalacion](doc/RLL-instalacion-v0.00.pdf)
+
+[Arquitectura](doc/RLLClient-arquitectura-v0.00.pdf)
+
+Intencion del proyecto :https://www.youtube.com/watch?v=CWIGXTgUmb8&t=10s<br/>
+
+[![Intencion del proyecto]](https://youtu.be/-bFDZmKrt8A)
