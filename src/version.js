@@ -7,4 +7,5 @@
 //         Las peticiones de ejecucion se pasaron a gey, no requiern data de transporte 
 //         Se puso verificacion de array vacio al grabar 
 // v2.0.01 Responsive breakpoint
-export  const ver='remote-lab-lib 2.0.01';
+// v2.0.02 add pdf msj about
+export  const ver='remote-lab-lib 2.0.02';
