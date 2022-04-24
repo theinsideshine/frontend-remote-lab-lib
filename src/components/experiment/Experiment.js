@@ -102,6 +102,8 @@ const Experiment = () => {
       Swal.fire({  icon: 'error', title: 'Parametros de entradas vacios'});
       return;
     }
+
+   
     const data = {  
 
       input0: memInputs[0].value,
