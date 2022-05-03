@@ -5,6 +5,7 @@ Arduino, que acepta los comandos para empezar y terminar el experimento, y almac
 valores de configuración en la memoria no volátil de la placa.
 Los módulos principales de son tres: front-end, back-end y librerías Arduino.
 
+<!--
 [Instalacion](doc/RLL-instalacion-v0.00.pdf)
 
 [Arquitectura](doc/RLLClient-arquitectura-v0.00.pdf)
@@ -14,3 +15,4 @@ Los módulos principales de son tres: front-end, back-end y librerías Arduino.
 [Intencion del proyecto](https://youtu.be/-bFDZmKrt8A)
 
 [Demo de integracion de experimento](https://www.youtube.com/watch?v=U23sJfh_hjU)
+---!>
