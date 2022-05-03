@@ -1,4 +1,4 @@
-import React,{ useEffect , useState}  from 'react'
+import React,{ useEffect , useState, forwardRef}  from 'react'
 import Typography from '@mui/material/Typography';
 
 import {Box, Grid ,Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
@@ -12,6 +12,9 @@ import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import { Divider } from '@mui/material';
 import { fetchWithoutToken } from '../../helpers/fetch';
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import  Swal from 'sweetalert2';
 
@@ -59,8 +62,24 @@ const useStyles = makeStyles((theme) => ({
    
 }));
 
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 export const Advanced = () => {
+
+  const [msjSnackBar, setmsjSnackBar] = useState('');
+  const [openSnackBarSuccess, setopenSnackBarSuccess] = useState(false);
+  const handleCloseSnackBarSuccess = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setopenSnackBarSuccess(false);
+  };
+
+
 
   const styles= useStyles();  
 
@@ -153,15 +172,23 @@ export const Advanced = () => {
                   
                             if ( strRoute === srtTestLib ) { // Ejecucion condicional 
                               setStatusLib(true);
-                              Swal.fire({  icon: 'success', title: 'Lectura correcta '}); 
+                              setmsjSnackBar('Lectura correcta!');
+                              setopenSnackBarSuccess(true);
+                             // Swal.fire({  icon: 'success', title: 'Lectura correcta '}); 
                             }  else if( strRoute === srtTestServer ) {
                               setStatusServer(true);
-                              Swal.fire({  icon: 'success', title: 'Lectura correcta '});                            
+                              setmsjSnackBar('Lectura correcta!');
+                              setopenSnackBarSuccess(true);
+                              //Swal.fire({  icon: 'success', title: 'Lectura correcta '});                            
                             }  else if( strRoute === srtTestSerial ) {
                               setSerialLib(false);
-                              Swal.fire({  icon: 'success', title: 'Lectura correcta '});                            
+                              setmsjSnackBar('Lectura correcta!');
+                              setopenSnackBarSuccess(true);
+                              //Swal.fire({  icon: 'success', title: 'Lectura correcta '});                            
                             }  else if( strRoute === srtDisableSerial ) {                              
-                              Swal.fire({  icon: 'success', title: 'Escritura correcta',text:'por favor lea el modo serie'});                            
+                              setmsjSnackBar('Escritura correcta!');
+                              setopenSnackBarSuccess(true);
+                              //Swal.fire({  icon: 'success', title: 'Escritura correcta',text:'por favor lea el modo serie'});                            
                             }                           
                       }else  {
                              
@@ -234,8 +261,10 @@ const runExample= async ( strRoute )=>{
                 const body = await response.json(); 
                 console.log(body);
           
-                if (body.result === 'ok'){            
-                  Swal.fire({  icon: 'success', title: 'Ejemplo ejecutado'});          
+                if (body.result === 'ok'){   
+                  setmsjSnackBar('Ejemplo ejecutado!');
+                  setopenSnackBarSuccess(true);        
+                 // Swal.fire({  icon: 'success', title: 'Ejemplo ejecutado'});          
           }  
           else  {
             Swal.fire({  icon: 'error', title: 'Error Libreria.',text:' Procure que no se este ejecutando el ejemplo'});
@@ -330,7 +359,9 @@ const runExample= async ( strRoute )=>{
                       }
                 
                     ])
-                    Swal.fire({  icon: 'success', title: 'Configuracion leida'});
+                    setmsjSnackBar('Configuracion leida!');
+                    setopenSnackBarSuccess(true);
+                   // Swal.fire({  icon: 'success', title: 'Configuracion leida'});
                 
                   }  else  {
                     Swal.fire({  icon: 'error', title: 'Error Libreria.',text:' No pudo guardar la configuracion'});
@@ -363,7 +394,9 @@ const runExample= async ( strRoute )=>{
                         
                           if(body.result === 'ok') {        
                             console.log(body);
-                            Swal.fire({  icon: 'success', title: 'Configuracion guardada'});
+                            setmsjSnackBar('Configuracion guardada!');
+                            setopenSnackBarSuccess(true);
+                            //Swal.fire({  icon: 'success', title: 'Configuracion guardada'});
                 
                           }  else  {
                             Swal.fire({  icon: 'error', title: 'Error Libreria.',text:' No pudo escribir la configuracion'});
@@ -454,7 +487,7 @@ const runExample= async ( strRoute )=>{
                     background: 'linear-gradient(180deg,#496cb2,#6390e9)',
                     borderRadius: 15                
                 }}>
-                  
+                 
                   <Typography align='center'>
                   Memoria arduino: parametros de configuracion</Typography>
 
@@ -524,6 +557,7 @@ const runExample= async ( strRoute )=>{
                       onClick={() => testConection(srtTestServer)}
                       >Probar servidor </Button> 
                       
+                      
                       <Typography align='center' color="#FFFFFF">
                         <br></br>Conexion : {statusServer? (<>Ok</>) : (<><b>error</b></>)} </Typography>
                       <Button
@@ -536,7 +570,7 @@ const runExample= async ( strRoute )=>{
                       <Button
                       startIcon={<SendIcon />}
                       onClick={() => testConection(srtTestLib)}>
-                        Probar Libreria </Button> 
+                        Probar Libreria </Button>                        
                       
                       <Typography align='center' color="#FFFFFF">
                           <br></br>Conexion : {statusLib? (<>Ok</>) : (<><b>error</b></>)} </Typography>
@@ -640,7 +674,13 @@ const runExample= async ( strRoute )=>{
               <Grid item xs={1} sm={1}>
             </Grid>
 
-             
+            <Snackbar open={openSnackBarSuccess} autoHideDuration={3000} onClose={handleCloseSnackBarSuccess}>
+                  <Alert onClose={handleCloseSnackBarSuccess} severity="success" sx={{ width: '100%' }}>
+                  {msjSnackBar}
+                  </Alert>
+            </Snackbar>           
+
+            
 
       </Grid>   
   )

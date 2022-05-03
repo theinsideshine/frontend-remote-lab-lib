@@ -1,6 +1,9 @@
-import React,{ useEffect, useState } from 'react';
+import React,{ useEffect, useState, forwardRef } from 'react';
 
 import Typography from '@mui/material/Typography';
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import  Swal from 'sweetalert2';
 
@@ -68,11 +71,24 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 
 
 
 const Experiment = () => { 
+
+  const [msjSnackBar, setmsjSnackBar] = useState('');
+  const [openSnackBarSuccess, setopenSnackBarSuccess] = useState(false);
+  const handleCloseSnackBarSuccess = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setopenSnackBarSuccess(false);
+  };
 
   const styles= useStyles();  
   const [modalEdit, setmodalEdit]=useState(false);
@@ -125,7 +141,9 @@ const Experiment = () => {
 
                      if (body.result ==='ok'){       
                       console.log(body);
-                      Swal.fire({  icon: 'success', title: 'Entradas guardadas'});
+                      setmsjSnackBar('Entradas guardadas!');
+                      setopenSnackBarSuccess(true);
+                      //Swal.fire({  icon: 'success', title: 'Entradas guardadas'});
 
                     }else  {
                       Swal.fire({  icon: 'error', title: 'Error Libreria'});
@@ -174,9 +192,11 @@ const readResult= async ( ipAddress )=>{
           {result: body.result40},{result: body.result41},{result: body.result42},{result: body.result43},{result: body.result44},
           {result: body.result45},{result: body.result46},{result: body.result47},{result: body.result48},{result: body.result49},
           
-        ]);
+        ]);          
 
-        Swal.fire({  icon: 'success', title: 'Resultados leidos'});  
+        setmsjSnackBar('Resultados leidos!');
+        setopenSnackBarSuccess(true);
+        //Swal.fire({  icon: 'success', title: 'Resultados leidos'});  
    
 
         }else  {
@@ -235,7 +255,9 @@ const ReadOutputs= async ( ipAddress )=>{
               value: body.output4
             },
             ])
-            Swal.fire({  icon: 'success', title: 'Salidas leidas'});
+            setmsjSnackBar('Salidas leidas!');
+            setopenSnackBarSuccess(true);
+            //Swal.fire({  icon: 'success', title: 'Salidas leidas'});
           }else  {
             Swal.fire({  icon: 'error', title: 'Error Libreria'});
             console.log('Error Libreria'); 
@@ -294,7 +316,9 @@ const ReadOutputs= async ( ipAddress )=>{
                             },
                       
                             ])  
-                            Swal.fire({  icon: 'success', title: 'Entradas leidas'});
+                            setmsjSnackBar('Entradas leidas!');
+                            setopenSnackBarSuccess(true);
+                           // Swal.fire({  icon: 'success', title: 'Entradas leidas'});
 
                           }else  {
                           Swal.fire({  icon: 'error', title: 'Error Libreria'});
@@ -322,7 +346,9 @@ const startExperiment= async ( ipAddress )=>{
             console.log(body);
             if (body.st_test === 0){ 
             setStatusLib(false); 
-            Swal.fire({  icon: 'success', title: 'Experimento ejecutado'});
+            setmsjSnackBar('Experimento ejecutado!');
+            setopenSnackBarSuccess(true);
+            //Swal.fire({  icon: 'success', title: 'Experimento ejecutado'});
 
         } else  {
           Swal.fire({  icon: 'error', title: 'Error Libreria'});
@@ -351,7 +377,9 @@ const readVersion= async ( ipAddress )=>{
 
       console.log(body);
       setVersionLib(body.version);
-      Swal.fire({  icon: 'success', title: 'Version leida'});   
+      setmsjSnackBar('Version leida!');
+      setopenSnackBarSuccess(true);
+      //Swal.fire({  icon: 'success', title: 'Version leida'});   
 
       } 
         else  {
@@ -590,6 +618,13 @@ const readVersion= async ( ipAddress )=>{
 
             </Box>  
           </Grid>
+
+          <Snackbar open={openSnackBarSuccess} autoHideDuration={3000} onClose={handleCloseSnackBarSuccess}>
+                  <Alert onClose={handleCloseSnackBarSuccess} severity="success" sx={{ width: '100%' }}>
+                  {msjSnackBar}
+                  </Alert>
+            </Snackbar>           
+
         </Grid>
          
   );    
