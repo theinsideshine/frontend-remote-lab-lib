@@ -503,11 +503,13 @@ const readVersion= async ( ipAddress )=>{
               <Button
                   startIcon={<SendIcon />}
                   onClick={() => WriteInputs(ipAddress)}
+                  disabled = {statusLib}
                   >Grabar parametros </Button>
 
                   <Button
                   startIcon={<SendIcon />} 
-                  onClick={() => ReadInputs(ipAddress)}                 
+                  onClick={() => ReadInputs(ipAddress)}  
+                  disabled = {statusLib}               
                   >Leer parametros </Button>
 
             </Box>  
@@ -534,7 +536,8 @@ const readVersion= async ( ipAddress )=>{
                 }}>
                   <Button
                   startIcon={<SendIcon />}
-                  onClick={() => startExperiment(ipAddress)}>
+                  onClick={() => startExperiment(ipAddress)}
+                  disabled = {statusLib}>
                   Empezar experimento </Button>   
                   <Typography align='center' color="#FFFFFF"> 
                   Estado : {statusLib? (<>En ejecucion</>) : (<>Detenido</>)} </Typography>
@@ -544,6 +547,7 @@ const readVersion= async ( ipAddress )=>{
                   <Button
                   startIcon={<SendIcon />}
                   onClick={() => readVersion(ipAddress)}
+                  disabled = {statusLib}
                   >Leer version </Button> 
                   <Typography align='center' color="#FFFFFF">
                    Version : {versionLib} </Typography>
@@ -553,6 +557,7 @@ const readVersion= async ( ipAddress )=>{
                   <Button
                   startIcon={<SendIcon />}
                   onClick={() => readResult(ipAddress)}
+                  disabled = {statusLib}
                   >Leer resultados </Button>
                   <ExcelFile element={<button>Bajar resultados</button>}>
                     <ExcelSheet data={dataSet1} name="resultados">
@@ -564,6 +569,7 @@ const readVersion= async ( ipAddress )=>{
 
                   <Divider sx={{ bgcolor: "#FFFFFF" }} />
             <TextField
+                      disabled = {statusLib}
                       id="ipAddress"
                       fullWidth
                       label="Ip del servidor"                                            
@@ -613,7 +619,8 @@ const readVersion= async ( ipAddress )=>{
 
               <Button
               startIcon={<SendIcon />} 
-              onClick={() => ReadOutputs(ipAddress)}>
+              onClick={() => ReadOutputs(ipAddress)}
+              disabled = {statusLib}>
               Leer parametros </Button>
 
             </Box>  
