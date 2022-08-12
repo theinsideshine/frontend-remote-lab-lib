@@ -10,7 +10,7 @@ Los módulos principales de son tres: front-end, back-end y librerías Arduino.
 
 [Arquitectura](doc/RLLClient-arquitectura-v0.00.pdf)
 
-
+[Manual del usuario](doc/RLL-manual-del-usuario-v1.00.pdf)
 
 [Intencion del proyecto](https://youtu.be/-bFDZmKrt8A)
 
